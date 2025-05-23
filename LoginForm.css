@@ -1,0 +1,63 @@
+.nav-list li a {
+  color: black;
+}
+/* .nav-bar {
+  background-color: white;
+} */
+.form-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+.nav-user #user-btn > i {
+  color: black;
+}
+.nav-list > li a::after {
+  background-color: black;
+}
+.nav-toggle > a {
+  color: black;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-transform: uppercase;
+  width: 370px;
+}
+form > label {
+  font-size: 1.8rem;
+  letter-spacing: 5px;
+  margin: 0 0 30px;
+}
+form p {
+  font-size: 1rem;
+}
+form > input {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid lightgrey;
+}
+form > button {
+  width: 100%;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+form > button:after {
+  border: 1px solid lightgrey;
+}
+form a {
+  color: black;
+  margin-bottom: 20px;
+  transition: 0.3s all;
+  font-size: 0.9rem;
+}
+form a:hover {
+  margin-left: 10px;
+  filter: drop-shadow(2px 2px 18px);
+}
