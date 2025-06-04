@@ -5,36 +5,87 @@ const toggle = document.querySelector(".nav-toggle i");
 const navCart = document.querySelectorAll(".nav-user > button > i");
 const navUser = document.querySelector(".nav-user  a i");
 // const navUser = document.getElementById("user-btn");
-console.log(navUser);
 
+// window.addEventListener("scroll", function () {
+//   if (window.scrollY > 0) {
+//     header.classList.add("sticky");
+//     navLogo.src = "Image/luxyWatchDark.png";
+//     for (let list of li) {
+//       list.style.color = "black";
+//     }
+//     toggle.style.color = "black";
+//     // navUser.style.color = "black";
+
+//     navCart.forEach((cart) => {
+//       cart.style.color = "black";
+//     });
+//   } else {
+//     header.classList.remove("sticky");
+//     navLogo.src = "Image/luxyWatchLight.png";
+//     for (let list of li) {
+//       list.style.color = "white";
+//     }
+//     toggle.style.color = "white";
+//     navUser.style.color = "white";
+
+//     navCart.forEach((cart) => {
+//       cart.style.color = "white";
+//     });
+//   }
+// });
 window.addEventListener("scroll", function () {
-  if (window.scrollY > 0) {
-    header.classList.add("sticky");
-    navLogo.src = "Image/luxyWatchDark.png";
-    for (let list of li) {
-      list.style.color = "black";
+  if (window.innerWidth >= 1280) {
+    if (window.scrollY > 0) {
+      header.classList.add("sticky");
+      navLogo.src = "Image/luxyWatchDark.png";
+      for (let list of li) {
+        list.style.color = "black";
+      }
+      toggle.style.color = "black";
+      navUser.style.color = "black";
+      navCart.forEach((cart) => {
+        cart.style.color = "black";
+      });
+    } else {
+      header.classList.remove("sticky");
+      navLogo.src = "Image/luxyWatchLight.png";
+      for (let list of li) {
+        list.style.color = "white";
+      }
+      toggle.style.color = "white";
+      navUser.style.color = "white";
+      navCart.forEach((cart) => {
+        cart.style.color = "white";
+      });
     }
-    toggle.style.color = "black";
-    navUser.style.color = "black";
-
-    navCart.forEach((cart) => {
-      cart.style.color = "black";
-    });
-  } else {
-    header.classList.remove("sticky");
-    navLogo.src = "Image/luxyWatchLight.png";
-    for (let list of li) {
-      list.style.color = "white";
+  } else if (window.innerWidth <= 1280) {
+    if (window.scrollY > 0) {
+      header.classList.add("sticky");
+      navLogo.src = "Image/luxyWatchDark.png";
+      toggle.style.color = "black";
+      // navUser.style.color = "black";
+      navCart.forEach((cart) => {
+        cart.style.color = "black";
+      });
+    } else {
+      header.classList.remove("sticky");
+      navLogo.src = "Image/luxyWatchLight.png";
+      // for (let list of li) {
+      //   list.style.color = "white";
+      // }
+      toggle.style.color = "white";
+      navUser.style.color = "white";
+      navCart.forEach((cart) => {
+        cart.style.color = "white";
+      });
     }
-    toggle.style.color = "white";
-    navUser.style.color = "white";
-
-    navCart.forEach((cart) => {
-      cart.style.color = "white";
-    });
   }
 });
-
+if (window.innerWidth <= 1280) {
+  for (let list of li) {
+    list.style.color = "black";
+  }
+}
 // nav toggle
 
 const navLists = document.querySelector(".nav-list");
@@ -50,26 +101,54 @@ const prodSlider = document.querySelectorAll(
   ".product-slider-wrapper .product-slider"
 );
 let counter = 0;
+
+// Initialize first slide
+prodSlider.forEach((slide, index) => {
+  if (index === 0) {
+    slide.classList.add("active");
+  } else {
+    slide.classList.remove("active");
+  }
+});
+
+function nextSlide() {
+  // Remove active class from current slide
+  prodSlider[counter].classList.remove("active");
+
+  // Update counter
+  counter = (counter + 1) % prodSlider.length;
+
+  // Add active class to next slide
+  prodSlider[counter].classList.add("active");
+}
+
+function prevSlide() {
+  // Remove active class from current slide
+  prodSlider[counter].classList.remove("active");
+
+  // Update counter
+  counter = (counter - 1 + prodSlider.length) % prodSlider.length;
+
+  // Add active class to previous slide
+  prodSlider[counter].classList.add("active");
+}
+
+// Add event listeners
 nextBtn.addEventListener("click", nextSlide);
 prevBtn.addEventListener("click", prevSlide);
-function nextSlide() {
-  prodSlider[counter].style.animation = "nextOut 1.5s forwards";
-  if (counter >= prodSlider.length - 1) {
-    counter = 0;
-  } else {
-    counter++;
-  }
-  prodSlider[counter].style.animation = "nextIn 1.5s forwards";
-}
-function prevSlide() {
-  prodSlider[counter].style.animation = "prevOut 1.5s forwards";
-  if (counter == 0) {
-    counter = prodSlider.length - 1;
-  } else {
-    counter--;
-  }
-  prodSlider[counter].style.animation = "prevIn 1.5s forwards";
-}
+
+// Optional: Add auto-slide functionality
+let slideInterval = setInterval(nextSlide, 5000);
+
+// Pause auto-slide on hover
+const sliderWrapper = document.querySelector(".product-slider-wrapper");
+sliderWrapper.addEventListener("mouseenter", () => {
+  clearInterval(slideInterval);
+});
+
+sliderWrapper.addEventListener("mouseleave", () => {
+  slideInterval = setInterval(nextSlide, 5000);
+});
 
 //      Click Feature
 
